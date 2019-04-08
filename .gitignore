@@ -13,7 +13,7 @@ obj/
 .nuget/
 packages/
 Resources/
-
+.vs/
 # Windows Installer files
 *.cab
 *.msi

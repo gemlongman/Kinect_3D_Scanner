@@ -1681,7 +1681,7 @@ namespace Microsoft.Samples.Kinect.KinectFusionExplorer
                 this.ResetReconstruction();
             }
 
-            if (null != this.volume && !this.savingMesh)
+            if (null != this.volume && !this.savingMesh && !pauseIntegration ) // && ! pauseIntegration gemlongman
             {
                 try
                 {
@@ -1743,6 +1743,9 @@ namespace Microsoft.Samples.Kinect.KinectFusionExplorer
         /// </summary>
         private void ProcessDepthData()
         {
+            //if (PauseIntegration) {
+            //    return;
+            //}
             // To enable playback of a .xef file through Kinect Studio and reset of the reconstruction
             // if the .xef loops, we test for when the frame timestamp has skipped a large number. 
             // Note: this will potentially continually reset live reconstructions on slow machines which
@@ -3859,6 +3862,30 @@ namespace Microsoft.Samples.Kinect.KinectFusionExplorer
                             ref this.deltaFromReferenceFrameBitmap,
                             this.deltaFromReferenceImage)));
             }
+        }
+
+
+        public void Write()
+        {
+            FileStream fs = new FileStream("E:\\ak.txt", FileMode.Create);
+            //获得字节数组
+            byte[] data = System.Text.Encoding.Default.GetBytes("Hello World!");
+            //开始写入
+            fs.Write(data, 0, data.Length);
+            //清空缓冲区、关闭流
+            fs.Flush();
+            fs.Close();
+        }
+
+        /// <summary>
+        /// save depth and other informations
+        /// added by gy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SavePictureButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
